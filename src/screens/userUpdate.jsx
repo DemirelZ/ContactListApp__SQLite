@@ -13,7 +13,7 @@ const db = SQLite.openDatabase({
 });
 const UserUpdate = ({route}) => {
   const navigation = useNavigation();
-  const {user} = route.params;
+  const {user, getUsers} = route.params;
 
   const [name, setName] = useState(user.name);
   const [surName, setSurName] = useState(user.surname);
@@ -37,7 +37,13 @@ const UserUpdate = ({route}) => {
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
               },
-              {text: 'OK', onPress: () => navigation.goBack()},
+              {
+                text: 'OK',
+                onPress: () => {
+                  getUsers();
+                  navigation.goBack();
+                },
+              },
             ],
           );
         },
@@ -64,6 +70,7 @@ const UserUpdate = ({route}) => {
               {
                 text: 'OK',
                 onPress: (_, result) => {
+                  getUsers();
                   resolve(result), navigation.goBack();
                 },
               },

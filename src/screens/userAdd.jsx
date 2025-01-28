@@ -13,7 +13,8 @@ const db = SQLite.openDatabase({
 });
 
 // create a component
-const UserAdd = ({navigation}) => {
+const UserAdd = ({navigation, route}) => {
+  const {getUsers} = route?.params;
   const [name, setName] = useState('');
   const [surName, setSurName] = useState('');
   const [phone, setPhone] = useState('');
@@ -50,7 +51,14 @@ const UserAdd = ({navigation}) => {
                 onPress: () => console.log('Cancel Pressed'),
                 style: 'cancel',
               },
-              {text: 'OK', onPress: () => navigation.goBack()},
+
+              {
+                text: 'OK',
+                onPress: () => {
+                  getUsers();
+                  navigation.goBack();
+                },
+              },
             ],
           );
         },

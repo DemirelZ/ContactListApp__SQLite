@@ -62,9 +62,11 @@ const UserList = ({navigation}) => {
             <RefreshControl refreshing={false} onRefresh={getUsers} />
           }
           data={users}
-          renderItem={({item}) => <UserCard item={item} />}
+          renderItem={({item}) => <UserCard item={item} getUsers={getUsers} />}
         />
-        <FlatActionButton onPress={() => navigation.navigate(USERADD)} />
+        <FlatActionButton
+          onPress={() => navigation.navigate(USERADD, {getUsers})}
+        />
       </View>
     </SafeAreaView>
   );

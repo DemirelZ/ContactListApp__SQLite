@@ -17,7 +17,7 @@ import {useNavigation} from '@react-navigation/native';
 import {USERUPDATE} from '../utils/routes';
 
 // create a component
-const UserCard = ({item}) => {
+const UserCard = ({item, getUsers}) => {
   const navigation = useNavigation();
   const callPhone = () => {
     const url = `tel:${item.phone}`;
@@ -43,7 +43,9 @@ const UserCard = ({item}) => {
           <Call size={30} color={Colors.GREEN} variant="Bold" />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate(USERUPDATE, {user: item})}>
+          onPress={() =>
+            navigation.navigate(USERUPDATE, {user: item, getUsers: getUsers})
+          }>
           <Edit size={30} color={Colors.BLUE} />
         </TouchableOpacity>
       </View>
